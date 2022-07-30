@@ -1,8 +1,9 @@
-from rest_framework import filters, viewsets, permissions, mixins
+from rest_framework import filters, mixins, permissions, viewsets
 from rest_framework.generics import get_object_or_404
 from rest_framework.pagination import LimitOffsetPagination
 
-from posts.models import Follow, Group, Post, User
+from posts.models import Group, Post, User
+
 from .permissions import AuthorPermission
 from .serializers import (
     CommentSerializer, FollowSerializer, GroupSerializer, PostSerializer
@@ -49,4 +50,5 @@ class FollowViewSet(mixins.CreateModelMixin,
         serializer.save(user=self.request.user)
 
     def get_queryset(self):
-        return Follow.objects.filter(user=self.request.user)
+        user = get_object_or_404(User, username=self.request.user)
+        return user.follower

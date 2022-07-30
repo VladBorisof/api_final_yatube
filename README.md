@@ -1,5 +1,7 @@
 # Description
 
+API service for working with the YaTube application
+
 # Install
 ## How to start a project:
 Clone the repository and change into it on the command line:
@@ -34,3 +36,32 @@ python3 -m pip install --upgrade pip
 ```python3 manage.py runserver```
 
 # Examples
+
+run to get posts:
+
+```GET http://127.0.0.1:8000/api/v1/posts/```
+
+run to create posts:
+
+```POST http://127.0.0.1:8000/api/v1/posts/```
+
+with body
+
+{
+    "text": "post 1"
+}
+
+run to get groups:
+
+```GET http://127.0.0.1:8000/api/v1/groups/```
+
+run to create comments for first post:
+
+```POST http://127.0.0.1:8000/api/v1/posts/1/comments/```
+
+with body
+
+{
+    "text": "comment for post",
+    "post": 1
+}
